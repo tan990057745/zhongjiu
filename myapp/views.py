@@ -100,4 +100,4 @@ def verifycode(request):
     #文件操作
     buff = io.BytesIO()
     image.save(buff, 'png') # 保存在内存中
-    return HttpResponse( buff.getvalue(),'image/png')
+    return HttpResponse(buff.getvalue(),'image/png')

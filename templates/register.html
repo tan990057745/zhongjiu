@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        table
+        {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+<form action="/register/" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td colspan="3" style="text-align: left">我已经注册，马上登录</td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><input type="text" placeholder="请输入手机号" name="user_tel"></td>
+        </tr>
+
+        <tr>
+            <td><input type="text" placeholder="请输入验证码" name="verifycode"></td>
+            <td><img src="{% url 'myapp:verifycode' %}"></td>
+            <td><a href="{% url 'myapp:verifycode' %}">看不清？换一张</a></td>
+        </tr>
+
+        <tr>
+            <td><input type="text" placeholder="请输入校验码" ></td>
+            <td colspan="2"><input type="button"value="免费获取校验码"></td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><input type="password" placeholder="请输入密码" name="password1" ></td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><input type="password" placeholder="请再次输入密码" name="password2" ></td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><input type="submit" value="同意协议并注册"></td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><a href="#">《中酒网服务条款》</a></td>
+        </tr>
+
+    </table>
+</form>
+
+</body>
+</html>
