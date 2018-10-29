@@ -61,8 +61,8 @@ def login(request):
 
 def verifycode(request):
     # 创建图片
-    width = 100
-    height = 50
+    width = 110
+    height = 38
     r = random.randrange(0,256)
     g = random.randrange(0,256)
     b = random.randrange(0,256)
@@ -84,7 +84,7 @@ def verifycode(request):
         draw.point(xy, fill=fill)
 
     # 导入字体
-    font = ImageFont.truetype('static/fonts/Fangsong.ttf', 40)
+    font = ImageFont.truetype('static/fonts/Fangsong.ttf', 18)
     # 字体颜色
     fontcolor1 = (255, random.randrange(0,256), random.randrange(0,256))
     fontcolor2 = (255, random.randrange(0, 256), random.randrange(0, 256))

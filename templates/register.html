@@ -1,57 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>注册</title>
-    <style>
-        table
-        {
-            margin: 0 auto;
-        }
-    </style>
-</head>
-<body>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册—中酒网</title>
+		<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}" ></script>
+		<script type="text/javascript" src="{% static 'js/register.js' %}" ></script>
+	</head>
+	<body>
+		<!--头部-->
+		<div class="header">
+			<!--头部的上部-->
+			<div class="header_top">
+				<ul class="header_top_left">
+					<li><a><img src="{% static 'img/zj-logo.png' %}"/></a></li>
+					<li>注册</li>
+				</ul>
+				<ul class="header_top_right">
+					<li>100%正品</li>
+					<li class="header_top_left1">一时达</li>
+					<li>金牌客服</li>
+				</ul>
+			</div>
+			<!--头部的尾部-->
+			<div class="header_bottom">
+				<div class="header_bottom_left"><a href=""></a></div>
+				<div class="header_bottom_right">
+                <form action="/register/" method="post">
+                    {% csrf_token %}
+                    <h1></h1>
+					<p>我已经注册，马上 <a href="{% url 'myapp:login' %}">登录&gt;&gt;</a></p>
+					<input type="text" placeholder="请输入手机号" class="inp1" />
+					<input type="text" placeholder="请输入验证码" class="inp2" />
+					<button class="identifyingCode">&nbsp;</button><span>看不清？换一张</span>
+					<input type="text" placeholder="请输入验证码" class="inp3" />
+					<button class="bnt1">免费获取校验码</button>
+					<input type="password" placeholder="请输入密码" class="inp4" />
+					<input type="password" placeholder="请输入确认密码" class="inp5" />
+					<button class="bnt2">同意协议并注册</button>
+					<a href="#" class="right_a">《中酒网服务条款》</a>
+                </form>
 
-<form action="/register/" method="post">
-    {% csrf_token %}
-    <table>
-        <tr>
-            <td colspan="3" style="text-align: left">我已经注册，马上登录</td>
-        </tr>
-
-        <tr>
-            <td colspan="3"><input type="text" placeholder="请输入手机号" name="user_tel"></td>
-        </tr>
-
-        <tr>
-            <td><input type="text" placeholder="请输入验证码" name="verifycode"></td>
-            <td><img src="{% url 'myapp:verifycode' %}"></td>
-            <td><a href="{% url 'myapp:verifycode' %}">看不清？换一张</a></td>
-        </tr>
-
-        <tr>
-            <td><input type="text" placeholder="请输入校验码" ></td>
-            <td colspan="2"><input type="button"value="免费获取校验码"></td>
-        </tr>
-
-        <tr>
-            <td colspan="3"><input type="password" placeholder="请输入密码" name="password1" ></td>
-        </tr>
-
-        <tr>
-            <td colspan="3"><input type="password" placeholder="请再次输入密码" name="password2" ></td>
-        </tr>
-
-        <tr>
-            <td colspan="3"><input type="submit" value="同意协议并注册"></td>
-        </tr>
-
-        <tr>
-            <td colspan="3"><a href="#">《中酒网服务条款》</a></td>
-        </tr>
-
-    </table>
-</form>
-
-</body>
+				</div>
+			</div>
+		</div>
+		<!--尾部-->
+		<div class="footer">
+			<p>Copyright © 2016 中酒网(www.zhongjiu.cn) 版权所有 <a href="#">京ICP备12022216号-2</a></p>
+			<p>购买前请确认达到法定饮酒年龄！中酒网不销售任何含酒精产品给18岁以下人士！</p>
+		</div>
+	</body>
 </html>
+
+
+

@@ -1,0 +1,253 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+/*头部下拉框*/
+.h_b_b_t_nav{
+	display: none;
+}
+/*回到顶部*/
+.div{
+	width: 50px;
+	line-height: 50px;
+	background: #8E8E8E;
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	font-size: 14px;
+	color: white;
+	text-align: center;
+	display: none;
+}
+.div:hover{
+	background: mediumvioletred;
+	cursor: pointer;
+}
+/*中间*/
+#content{
+	width: 1200px;
+	height: auto;
+	margin: 0 auto;
+	overflow: hidden;
+}
+p{
+	width: 100%;
+	line-height: 40px;
+	font-size: 14px;
+}
+#content p a{
+	text-decoration: none;
+	color: black;
+}
+#content p a:hover{
+	color: red;
+}
+/*中间左边上两个div*/
+.content_left{
+	width: 180px;
+	height: auto;
+	float: left;
+	display: block;
+}
+.content_left h3{
+	width: 180px;
+	line-height: 38px;
+	text-align: center;
+	font-weight: normal;
+	font-size: 14px;
+	background: #E8E8E8;
+	border: 1px solid #ccc;
+	border-top: 2px solid #ccc;
+}
+.content_left p{
+	width: 120px;
+	line-height: 38px;
+	color: red;
+	font-weight: normal;
+	font-size: 14px;
+	padding-left: 60px;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+/*中间左边商品列表*/
+.content_left_bottom{
+	width: 180px;
+	height: auto;
+	margin-top: 20px;
+	border: 1px solid #ccc;
+}
+.content_left_bottom ul{
+	width: 180px;
+	height: auto;
+}
+.content_left_bottom ul li{
+	width: 180px;
+	height: 250px;
+	list-style-type: none;
+}
+.content_left_bottom ul li img{
+	width: 160px;
+	height: 160px;
+	padding: 10px;
+}
+.content_left_bottom ul li h4{
+	width: 160px;
+	height: 36px;
+	padding: 0 10px;
+	font-size: 14px;
+	font-weight: normal;
+	cursor: pointer;
+}
+.content_left_bottom ul li h4:hover{
+	color: red;
+}
+.content_left_bottom ul li p{
+	width: 160px;
+	line-height: 30px;
+	padding: 0 10px;
+	border: none;
+}
+.content_left_bottom ul li p i{
+	font-size: 16px;
+	font-style: normal;
+}
+.content_left_bottom ul li p span{
+	float: right;
+	font-size: 12px;
+	color: #666;
+}
+/*右边*/
+.content_right{
+	width: 1000px;
+	margin-left: 10px;
+	height: auto;
+	float: left;
+}
+.content_right h3{
+	width: 990px;
+	line-height: 38px;
+	font-weight: normal;
+	font-size: 14px;
+	padding-left: 10px;
+	background: #E8E8E8;
+	border: 1px solid #ccc;
+}
+.content_right h3 span{
+	color: red;
+	font-weight: bold;
+}
+.content_right ul{
+	width: 100%;
+	height: 38px;
+	margin-top: 20px;
+	border-bottom: 1px solid #ccc;
+}
+.content_right .ul1 li{
+	width: 80px;
+	line-height: 36px;
+	float: left;
+	text-align: center;
+	list-style-type: none;
+}
+.content_right ul li a{
+	font-size: 13px;
+	color: blue;
+	text-decoration: none;
+}
+.content_right ul li a:hover{
+	color: red;
+}
+.content_right .ul2{
+	background: #E8E8E8;
+	line-height: 36px;
+	border: 1px solid #ccc;
+}
+.content_right .ul2 li{
+	float: left;
+	list-style-type: none;
+	margin-left: 20px;
+}
+.content_right .ul2 li a{
+	color: #666;
+	display: inline-block;
+	line-height: 26px;
+	background: white;
+	padding: 0 20px;
+	margin-top: 6px;
+}
+.content_right .shops{
+	width: 1000px;
+	height: auto;
+}
+.content_right .shops ul{
+	width: 1000px;
+	height: auto;
+}
+.content_right .shops ul li{
+	width: 220px;
+	height: 334px;
+	float: left;
+	padding: 10px 7px;
+	margin: 0 10px 10px 0;
+	list-style-type: none;
+	border: 3px solid #ccc;
+}
+/*.content_right .shops ul li:hover{
+	border: 3px solid #ccc;
+}*/
+.content_right .shops ul li img{
+	width: 220px;
+	height: 220px;	
+	cursor: pointer;
+}
+.content_right .shops ul li h4{
+	width: 160px;
+	height: 36px;
+	padding: 0 10px;
+	font-size: 14px;
+	font-weight: normal;
+	cursor: pointer;
+}
+.content_right .shops ul li h4:hover{
+	color: red;
+}
+.content_right .shops ul li p{
+	width: 160px;
+	line-height: 30px;
+	padding: 0 10px;
+	border: none;
+}
+.content_right .shops ul li p i{
+	font-size: 20px;
+	font-style: normal;
+	color: red;
+}
+.content_right .shops ul li p span{
+	float: right;
+	font-size: 12px;
+	color: blue;
+	cursor: pointer;
+}
+.content_right .shops ul li p span:hover{
+	color: red;
+}
+.content_right .shops ul li .btn1{
+	width: 96px;
+	height: 25px;
+	background: white;
+	border: 1px solid #ccc;
+	margin-right: 30px;
+	color: #666;
+}
+.content_right .shops ul li .btn2{
+	width: 56px;
+	height: 25px;
+	background: white;
+	border: 1px solid #ccc;
+	color: #666;
+}
+.content_right .shops ul li button:hover{
+	background: red;
+	color: white;
+	cursor: pointer;
+}
