@@ -57,8 +57,6 @@ def login(request):
     else:
         return HttpResponse('用户名或密码错误')
 
-
-
 def verifycode(request):
     # 创建图片
     width = 110
@@ -84,7 +82,7 @@ def verifycode(request):
         draw.point(xy, fill=fill)
 
     # 导入字体
-    font = ImageFont.truetype('static/fonts/Fangsong.ttf', 18)
+    font = ImageFont.truetype('static/fonts/Fangsong.ttf',25)
     # 字体颜色
     fontcolor1 = (255, random.randrange(0,256), random.randrange(0,256))
     fontcolor2 = (255, random.randrange(0, 256), random.randrange(0, 256))
@@ -101,3 +99,13 @@ def verifycode(request):
     buff = io.BytesIO()
     image.save(buff, 'png') # 保存在内存中
     return HttpResponse(buff.getvalue(),'image/png')
+
+
+#创建校验码
+def verifynum(request):
+    str1 = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
+    rand_str1 = ''
+    for i in range(0, 4):
+        temp = random.randrange(0, len(str1))
+        rand_str1 += str[temp]
+    return HttpResponse(rand_str1)

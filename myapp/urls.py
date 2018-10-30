@@ -7,4 +7,5 @@ urlpatterns = [
     url('^register/$', views.register, name='register'),
     url('^login/$', views.login, name='login'),
     url('^verifycode/$', views.verifycode, name='verifycode'),
+    url('^verifynum/$', views.verifynum, name='verifynum'),
 ]
