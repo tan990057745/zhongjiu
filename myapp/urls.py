@@ -3,9 +3,11 @@ from django.conf.urls import url
 from myapp import views
 
 urlpatterns = [
-    url('^$', views.index, name='index'),
-    url('^register/$', views.register, name='register'),
-    url('^login/$', views.login, name='login'),
-    url('^verifycode/$', views.verifycode, name='verifycode'),
-    url('^verifynum/$', views.verifynum, name='verifynum'),
+    url(r'^$', views.index, name='index'),
+    url(r'^register/$', views.register, name='register'),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^verifycode/\d+/$', views.verifycode, name='verifycode'),
+    url(r'^shoppingCart/$', views.shoppingCart, name='shoppingCart'),
+    url(r'^test/$', views.test, name='test'),
+
 ]

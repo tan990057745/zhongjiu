@@ -39,7 +39,7 @@ def register(request):
         return response
 
 
-
+######登陆#################
 def login(request):
     if request.method == 'GET':
         return render(request,'login.html')
@@ -56,11 +56,15 @@ def login(request):
         return response
     else:
         return HttpResponse('用户名或密码错误')
+#####以上为登陆######
 
+
+
+###########验证码########
 def verifycode(request):
     # 创建图片
     width = 110
-    height = 38
+    height = 40
     r = random.randrange(0,256)
     g = random.randrange(0,256)
     b = random.randrange(0,256)
@@ -99,13 +103,20 @@ def verifycode(request):
     buff = io.BytesIO()
     image.save(buff, 'png') # 保存在内存中
     return HttpResponse(buff.getvalue(),'image/png')
+#########以上为校验码########
 
 
-#创建校验码
-def verifynum(request):
-    str1 = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
-    rand_str1 = ''
-    for i in range(0, 4):
-        temp = random.randrange(0, len(str1))
-        rand_str1 += str[temp]
-    return HttpResponse(rand_str1)
+
+###########购物车#####
+def shoppingCart(request):
+    return render(request,'shoppingCart.html')
+#######以上为购物车#####
+
+
+
+########开发调试###################
+def test(request):
+    return render(request,'test.html')
+#######以上为开发调试###############
+
+
