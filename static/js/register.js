@@ -27,21 +27,23 @@ $(function(){
 	//比较校验码输入是否正确
 	$('.inp3').change(function(){
 		var checkCode = $('.inp3').val();
-		if(checkCode.toLowerCase() == strings.toLowerCase()){
-			alert("校验码输入正确");
-
-		}else{
-			alert("请输入正确的校验码");
-		}
+		if(checkCode.toLowerCase() != strings.toLowerCase()) {
+            $('.failVerify').val("请输入正确的校验码");
+            alert("请输入正确的校验码")
+        }else
+        {
+            $('.failVerify').val("");
+        }
 	})
 
 	//比较两次密码是否输入一致
 	$('.inp5').change(function () {
-		if($('.inp4').val() == $('.inp5').val()){
-			alert("两次密码输入正确");
-		}else{
-			alert("两次输入密码不一致");
-		}
+		if($('.inp4').val() != $('.inp5').val()) {
+            $('#failPassword').html("两次输入密码不一致");
+        }else
+        {
+            $('#failPassword').html("");
+        }
     })
 
 })

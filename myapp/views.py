@@ -21,22 +21,38 @@ def register(request):
         user_tel = request.POST.get('user_tel')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-        verifycode = request.POST.get('verifycode')
+
+        inpverifycode = request.POST.get('inputVerifyCode')
+        failVerify = request.POST.get('failVerify')
+        verifycode = request.session.get('rand_str')
+
+        # 先判断HTML产生的校验码是否输入正确
+        if failVerify == "":    #为空则校验码输入正确
+            #再判断后台生成的验证码是否正确输入
+            if len(inpverifycode) == len(verifycode):
+                for i in range(len(verifycode)):
+                    if verifycode[i].lower()!=inpverifycode[i].lower():
+                        return HttpResponse("验证码输入错误，请重新输入")
+                else:
+                    #最后判断密码输入是否OK
+                    if password1 == password2:
+                        user = User()
+                        user.user_tel = user_tel
+                        user.password = password1
+                        user.save()
+                        response = redirect('myapp:index')
+                        response.set_cookie('user_tel', user_tel)
+                        return response
+                    else:
+                        return HttpResponse("两次密码输入不一致，请重新输入")
+            else:
+                return HttpResponse("验证码输入长度错误，请重新输入")
+        else:          #校验码信息不为空，则没有正确输入校验码
+            return HttpResponse("请重新获取验证码并正确输入！")
 
 
-        user = User()
-        user.user_tel = user_tel
-        user.password = password1
-        if password1 == password2:
-            user.password = password1
-        else:
-            return HttpResponse('两次密码不一致，请重新输入！')
-        user.save()
 
-        response = redirect('myapp:index')
-        response.set_cookie('user_tel',user_tel)
 
-        return response
 
 
 ######登陆#################
@@ -76,6 +92,11 @@ def verifycode(request):
         temp = random.randrange(0,len(str))
         rand_str += str[temp]
 
+     # session保存验证码
+    request.session['rand_str'] = rand_str
+    request.session.set_expiry(60*3)
+
+
     # 创建画笔
     draw = ImageDraw.Draw(image)
 
@@ -103,7 +124,15 @@ def verifycode(request):
     buff = io.BytesIO()
     image.save(buff, 'png') # 保存在内存中
     return HttpResponse(buff.getvalue(),'image/png')
-#########以上为校验码########
+#########以上为验证码########
+
+
+
+
+
+
+
+
 
 
 
