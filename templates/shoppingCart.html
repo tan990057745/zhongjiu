@@ -19,7 +19,7 @@
 				<ul>
 					<li><i></i><a href="">收藏网站 </a></li>
 					<li>欢迎来到</li>
-					<li><a href="{% url 'myapp:index' %}">中酒网</a></li>
+					<li><a href="{% url 'myapp:home' %}">中酒网</a></li>
 				</ul>
 				<ul>
 					<li><a href="{% url 'myapp:login' %}">[登录]</a> <a href="{% url 'myapp:register' %}">[免费注册]</a></li>
@@ -43,7 +43,7 @@
 			<div class="cart_message">
 				<ul>
 					<li>购物车内暂时没有商品，<a href="{% url 'myapp:login' %}">登录</a>后，将显示您之前加入的商品</li>
-					<li>去<a href="{% url 'myapp:index' %}">首页</a>挑选喜欢的商品</li>
+					<li>去<a href="{% url 'myapp:home' %}">首页</a>挑选喜欢的商品</li>
 				</ul>
 			</div>
 			<!--有商品时购物车-->

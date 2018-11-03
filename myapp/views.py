@@ -46,7 +46,7 @@ def register(request):
                         user.user_tel = user_tel
                         user.password = password1
                         user.save()
-                        response = redirect('myapp:index')
+                        response = redirect('myapp:home')
                         response.set_cookie('user_tel', user_tel)
                         return response
                     else:
@@ -73,7 +73,7 @@ def login(request):
     if users.count():
         user = users.first()
 
-        response = redirect('myapp:index')
+        response = redirect('myapp:home')
         response.set_cookie('user_tel',user.user_tel)
         return response
     else:
@@ -131,14 +131,6 @@ def verifycode(request):
     image.save(buff, 'png') # 保存在内存中
     return HttpResponse(buff.getvalue(),'image/png')
 #########以上为验证码########
-
-
-
-
-
-
-
-
 
 
 
