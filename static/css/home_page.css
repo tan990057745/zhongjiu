@@ -23,7 +23,7 @@
 	cursor: pointer;
 }
 .fixeds li:first-child{
-	background: url(../img/jiang-d.jpg) no-repeat center center;
+	background: url(/static/img/jiang-d.jpg) no-repeat center center;
 }
 .fixeds li a{
 	color: #444;
@@ -35,7 +35,7 @@
 .fixeds li:last-child{
 	width: 100px;
 	height: 141px;
-	background:  url(../img/jiang-w.jpg) no-repeat center top;
+	background:  url(/static/img/jiang-w.jpg) no-repeat center top;
 }
 .fixeds li:last-child a{
 	width: 100px;
@@ -121,7 +121,7 @@
 	width: 30px;
 	height: 36px;
 	left: 10px;
-	background: url(../img/icon_index.png) no-repeat -240px -70px;
+	background: url(/static/img/icon_index.png) no-repeat -240px -70px;
 }
 .banner_right h3 span{
 	font-size: 14px;
@@ -167,7 +167,7 @@
 .b_r_img{
 	width: 220px;
 	height: 180px;
-	background: url(../img/gt.jpg) no-repeat center center;
+	background: url(/static/img/gt.jpg) no-repeat center center;
 	background-size: cover;
 }
 /*品牌特卖*/
@@ -179,7 +179,7 @@
 .sample_sale h1{
 	width: 100%;
 	height: 64px;
-	background: url(../img/bg-slash.jpg) center center repeat-x;
+	background: url(/static/img/bg-slash.jpg) repeat-x center;
 }
 .sample_sale h1 span{
 	line-height: 64px;
@@ -209,7 +209,7 @@
 	cursor: pointer;
 }
 .select{
-	background: url(../img/icon_index.png) no-repeat -320px -63px;
+	background: url(/static/img/icon_index.png) no-repeat -320px -63px;
 	color: white;
 }
 .tab-con{
@@ -244,7 +244,7 @@
 .flash_sale h1{
 	width: 100%;
 	height: 64px;
-	background: url(../img/bg-slash.jpg) center center repeat-x;
+	background: url(/static/img/bg-slash.jpg) center center repeat-x;
 }
 .flash_sale h1>span:first-child{
 	height: 31px;
@@ -295,7 +295,7 @@
 	margin-left: 20px;
 	position: relative;
 	top: 4px;
-	background: url(../img/icon_index.png) no-repeat 0 -238px;
+	background: url(/static/img/icon_index.png) no-repeat 0 -238px;
 }
 .flash_sale h1 .clock em{
 	font-style: normal;
@@ -374,7 +374,7 @@
 	display: inline-block;
 	width: 30px;
 	height: 62px;
-	background: url(../img/icon_index.png) no-repeat -80px -222px;
+	background: url(/static/img/icon_index.png) no-repeat -80px -222px;
 }
 .floor_liquor h1 span{
 	display: inline-block;
@@ -450,7 +450,7 @@
 	font-size: 12px;
 	color: white;
 	height: 28px;
-	background: url(../img/icon_index.png) no-repeat -400px 0px;
+	background: url(/static/img/icon_index.png) no-repeat -400px 0px;
 }
 .floor_liquor .floor_liquor_content .f_l_c_left ul li a:hover{
 	text-decoration: underline;
@@ -460,7 +460,7 @@
 	display: inline-block;
 	width: 200px;
 	height: 360px;
-	background: url(../img/baijiu0219.jpg) no-repeat;
+	background: url(/static/img/baijiu0219.jpg) no-repeat;
 }
 /*中间*/
 .f_l_c_content{
@@ -568,7 +568,7 @@
 	display: inline-block;
 	width: 30px;
 	height: 62px;
-	background: url(../img/icon_index.png) no-repeat -160px -222px;
+	background: url(/static/img/icon_index.png) no-repeat -160px -222px;
 }
 .red_wine h1 span{
 	display: inline-block;
@@ -644,7 +644,7 @@
 	font-size: 12px;
 	color: white;
 	height: 28px;
-	background: url(../img/icon_index.png) no-repeat -400px 0px;
+	background: url(/static/img/icon_index.png) no-repeat -400px 0px;
 }
 .red_wine .red_wine_content .r_w_c_left ul li a:hover{
 	text-decoration: underline;
@@ -654,7 +654,7 @@
 	display: inline-block;
 	width: 200px;
 	height: 360px;
-	background: url(../img/hongjiu.jpg) no-repeat;
+	background: url(/static/img/hongjiu.jpg) no-repeat;
 }
 /*中间*/
 .r_w_c_content{
@@ -750,7 +750,7 @@
 	display: inline-block;
 	width: 30px;
 	height: 62px;
-	background: url(../img/icon_index.png) no-repeat -240px -222px;
+	background: url(/static/img/icon_index.png) no-repeat -240px -222px;
 }
 .foreign_wine h1 span{
 	display: inline-block;
@@ -826,7 +826,7 @@
 	font-size: 12px;
 	color: white;
 	height: 28px;
-	background: url(../img/icon_index.png) no-repeat -400px 0px;
+	background: url(/static/img/icon_index.png) no-repeat -400px 0px;
 }
 .foreign_wine .foreign_wine_content .f_w_c_left ul li a:hover{
 	text-decoration: underline;
@@ -836,7 +836,7 @@
 	display: inline-block;
 	width: 200px;
 	height: 360px;
-	background: url(../img/yangjiu1.jpg) no-repeat;
+	background: url(/static/img/yangjiu1.jpg) no-repeat;
 }
 /*中间*/
 .f_w_c_content{
@@ -932,7 +932,7 @@
 	display: inline-block;
 	width: 30px;
 	height: 62px;
-	background: url(../img/icon_index.png) no-repeat -320px -222px;
+	background: url(/static/img/icon_index.png) no-repeat -320px -222px;
 }
 .other h1 span{
 	display: inline-block;
@@ -1004,7 +1004,7 @@
 	font-size: 12px;
 	color: white;
 	height: 28px;
-	background: url(../img/icon_index.png) no-repeat -400px 0px;
+	background: url(/static/img/icon_index.png) no-repeat -400px 0px;
 }
 .other .other_content .o_c_left ul li a:hover{
 	text-decoration: underline;
@@ -1014,7 +1014,7 @@
 	display: inline-block;
 	width: 200px;
 	height: 360px;
-	background: url(../img/yutiaojiu.jpg) no-repeat;
+	background: url(/static/img/yutiaojiu.jpg) no-repeat;
 }
 /*中间*/
 .o_c_content{

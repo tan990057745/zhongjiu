@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证</title>
+</head>
+<body>
+<form action="/verifynum/" method="post">
+    {% csrf_token %}
+    <input type="text" placeholder="请输入验证码">
+    <span>{{ rand_str1 }}</span>
+    <div class="testbutton">免费获取校验码</div>
+    <input type="submit" value="看不清，换一张">
+
+</form>
+<img src = "{% url 'myapp:verifycode' %}" class="code">
+<div class="changeCode">换一张图片</div>
+<img src="#" class="testcode">
+
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-1.12.3.js' %}" charset="UTF-8"></script>
+<script type="text/javascript" src="{% static 'js/buttonTest.js' %}" ></script>
+</html>

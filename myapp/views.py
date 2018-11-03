@@ -6,12 +6,16 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from myapp.models import User
+from myapp.models import User, Wheel
 
 
-def index(request):
-    user_tel = request.COOKIES.get('user_tel')
-    return render(request,'index.html',context={'user_tel':user_tel})
+def home(request):
+
+    wheels= Wheel.objects.all()
+    data = {
+        'wheels':wheels
+    }
+    return render(request,'home.html',context=data)
 
 
 def register(request):
@@ -35,6 +39,8 @@ def register(request):
                         return HttpResponse("验证码输入错误，请重新输入")
                 else:
                     #最后判断密码输入是否OK
+
+
                     if password1 == password2:
                         user = User()
                         user.user_tel = user_tel
@@ -147,5 +153,4 @@ def shoppingCart(request):
 def test(request):
     return render(request,'test.html')
 #######以上为开发调试###############
-
 

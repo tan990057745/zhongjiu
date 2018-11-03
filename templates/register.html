@@ -34,16 +34,24 @@
                         {% csrf_token %}
                         <h1></h1>
 					    <p>我已经注册，马上 <a href="{% url 'myapp:login' %}">登录&gt;&gt;</a></p>
-					    <input type="text" placeholder="请输入手机号" class="inp1" name="user_tel"/>
+					    <input type="text" placeholder="请输入11位手机号" class="inp1" name="user_tel"/>
 					    <input type="text" placeholder="请输入验证码" class="inp2" name="inputVerifyCode"/>
                         <img src="{% url 'myapp:verifycode' %}" class="changeCode" id="codePic">&nbsp;<span class="changeCode">看不清？换一张</span>
 
+
+
+
 					    <input type="text" placeholder="请输入验证码" class="inp3" />
-                        <span class="getVerify">免费获取校验码</span>
-					    <input type="text" name="failVerify" class="failVerify" >
-                        <input type="password" placeholder="请输入密码" class="inp4" name="password1"/>
-					    <input type="password" placeholder="请输入确认密码" class="inp5" name="password2"/>
-                        <p id="failPassword"></p>
+                        <span class="bnt1">免费获取校验码</span>
+					    <input type="text" style="display: none" name="VerifyOK" >
+
+
+
+                        <input type="password" placeholder="请输入密码" class="inp4" name="password"/>
+					    <input type="password" placeholder="请输入确认密码" class="inp5" />
+                        <input type="text" style="display: none" name="passwordOK" >
+
+
 					    <input class="bnt2" type="submit" value="同意协议并注册">
 					    <a href="#" class="right_a">《中酒网服务条款》</a>
 
