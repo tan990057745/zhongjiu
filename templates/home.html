@@ -12,6 +12,7 @@
     <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/head.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/home_page.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/home_show.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/swiper.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/home_swiper.js' %}"></script>
 </head>
@@ -670,7 +671,7 @@
         <h1>
             <i></i>
             <span>白酒</span>
-            <ul>
+            <ul class="type-item">
                 <li>爆品推荐</li>
                 <li>茅台</li>
                 <li>五粮液</li>
@@ -695,7 +696,20 @@
                 </ul>
                 <a href="#"></a>
             </div>
-            <div class="f_l_c_content"></div>
+            <div class="f_l_c_content">
+{#                此处插入主页商品展示图#}
+                <div>
+                    {% for whitespirit in whitespirits %}
+                        <ul>
+                            <li><img src="{{ whitespirit.img }}"></li>
+                            <li><sapn></sapn>{{ whitespirit.name }}</span></li>
+                            <li><p>￥{{ whitespirit.price }}</p></li>
+                        </ul>
+
+                    {% endfor %}
+                </div>
+            </div>
+
             <div class="f_l_c_right">
                 <a href="#"><img src="{% static 'img/xifeng.jpg' %}" alt=""></a>
                 <a href="#"><img src="{% static 'img/jxljguanggao.jpg' %}" alt=""> </a>

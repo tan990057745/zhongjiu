@@ -2,18 +2,24 @@ import io
 import random
 
 from PIL import ImageFont, ImageDraw, Image
-from django.http import HttpResponse
+from django.http import HttpResponse, response
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from myapp.models import User, Wheel
+from myapp.models import User, Wheel, whiteSpirit
 
 
 def home(request):
 
     wheels= Wheel.objects.all()
+
+    typeIndex = request.COOKIES.get('typeIndex',0)
+    # titletypeid = TitleTypeid.objects.filter(typeid=typeIndex)
+    whitespirits = whiteSpirit.objects.filter(typeid=typeIndex)
+
     data = {
-        'wheels':wheels
+        'wheels':wheels,
+        'whitespirits':whitespirits,
     }
     return render(request,'home.html',context=data)
 
