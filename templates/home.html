@@ -672,8 +672,8 @@
             <i></i>
             <span>白酒</span>
             <ul class="type-item">
-                <li><a href="{% url 'myapp:home' %}">爆品推荐</a></li>
-                <li><a href="{% url 'myapp:home' %}">茅台</a></li>
+                <li>爆品推荐</li>
+                <li>茅台</li>
                 <li>五粮液</li>
                 <li>酱香</li>
                 <li>浓香</li>
@@ -698,16 +698,68 @@
             </div>
             <div class="f_l_c_content">
 {#                此处插入主页商品展示图#}
-                <div>
-                    {% for whitespirit in whitespirits %}
+                <div style="display: block">
+                    {% for whitespirit in whitespirits0 %}
                         <ul>
                             <li><img src="{{ whitespirit.img }}"></li>
-                            <li>{{ whitespirit.name }}</li>
-                            <li><p>￥{{ whitespirit.price }}</p></li>
+                            <li><p>{{ whitespirit.name }}</p></li>
+                            <li><span>￥{{ whitespirit.price }}</span></li>
                         </ul>
 
                     {% endfor %}
                 </div>
+
+                <div style="display: none">
+                    {% for whitespirit in whitespirits1 %}
+                        <ul>
+                            <li><img src="{{ whitespirit.img }}"></li>
+                            <li><p>{{ whitespirit.name }}</p></li>
+                            <li><span>￥{{ whitespirit.price }}</span></li>
+                        </ul>
+                    {% endfor %}
+                </div>
+
+                <div style="display: none">
+                    {% for whitespirit in whitespirits2 %}
+                        <ul>
+                            <li><img src="{{ whitespirit.img }}"></li>
+                            <li><p>{{ whitespirit.name }}</p></li>
+                            <li><span>￥{{ whitespirit.price }}</span></li>
+                        </ul>
+
+                    {% endfor %}
+                </div>
+
+                <div style="display: none">
+                    {% for whitespirit in whitespirits3 %}
+                        <ul>
+                            <li><img src="{{ whitespirit.img }}"></li>
+                            <li><p>{{ whitespirit.name }}</p></li>
+                            <li><span>￥{{ whitespirit.price }}</span></li>
+                        </ul>
+                    {% endfor %}
+                </div>
+
+                <div style="display: none">
+                    {% for whitespirit in whitespirits4 %}
+                        <ul>
+                            <li><img src="{{ whitespirit.img }}"></li>
+                            <li><p>{{ whitespirit.name }}</p></li>
+                            <li><span>￥{{ whitespirit.price }}</span></li>
+                        </ul>
+                    {% endfor %}
+                </div>
+
+                <div style="display: none">
+                    {% for whitespirit in whitespirits5 %}
+                        <ul>
+                            <li><img src="{{ whitespirit.img }}"></li>
+                            <li><p>{{ whitespirit.name }}</p></li>
+                            <li><span>￥{{ whitespirit.price }}</span></li>
+                        </ul>
+                    {% endfor %}
+                </div>
+
             </div>
 
             <div class="f_l_c_right">

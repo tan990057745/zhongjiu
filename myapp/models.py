@@ -43,7 +43,29 @@ class whiteSpirit(HomeShow):
     class Meta:
         db_table = 'zj_whiteSpirit'
 
-# # 创建商品分类表格
-# class TitleTypeid(models.Model):
-#     titlename = models.CharField(max_length=100)
-#     typeid = models.CharField(max_length=10)
+
+#创建商城商品列表
+class Goods(models.Model):
+    img = models.CharField(max_length=256)  #图片
+    name = models.CharField(max_length=100) #名字
+    price = models.CharField(max_length=100) #价格
+    saleNum = models.IntegerField()         #销量
+    commentsNum = models.CharField(max_length=100)   #评论数量
+
+    isxf = models.CharField(max_length=10)         #是否优选
+    isspec = models.CharField(max_length=10)       #是否特价
+    brandid = models.CharField(max_length=10)       #品牌ID
+    placeid = models.CharField(max_length=10)       #产地
+    priceid = models.CharField(max_length=10)       #价格
+    suitid = models.CharField(max_length=10)        #适用ID
+    sortid = models.CharField(max_length=10)        #按照什么排序
+    shelfTime = models.TimeField()                  #上架时间
+
+    class Meta:
+        db_table='zj_market'
+
+
+
+
+
+

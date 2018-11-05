@@ -12,16 +12,26 @@ from myapp.models import User, Wheel, whiteSpirit
 def home(request):
 
     wheels= Wheel.objects.all()
-
-    typeIndex = request.COOKIES.get('typeIndex',0)
-    # titletypeid = TitleTypeid.objects.filter(typeid=typeIndex)
-    whitespirits = whiteSpirit.objects.filter(typeid=typeIndex)
+    whitespirits0 = whiteSpirit.objects.filter(typeid=0)
+    whitespirits1 = whiteSpirit.objects.filter(typeid=1)
+    whitespirits2 = whiteSpirit.objects.filter(typeid=2)
+    whitespirits3 = whiteSpirit.objects.filter(typeid=3)
+    whitespirits4 = whiteSpirit.objects.filter(typeid=4)
+    whitespirits5 = whiteSpirit.objects.filter(typeid=5)
 
     data = {
         'wheels':wheels,
-        'whitespirits':whitespirits,
+        'whitespirits0': whitespirits0,
+        'whitespirits1': whitespirits1,
+        'whitespirits2': whitespirits2,
+        'whitespirits3': whitespirits3,
+        'whitespirits4': whitespirits4,
+        'whitespirits5': whitespirits5,
     }
     return render(request,'home.html',context=data)
+
+
+
 
 
 def register(request):
@@ -152,5 +162,7 @@ def test(request):
     return render(request,'test.html')
 #######以上为开发调试###############
 
-def market(request):
-    return render(request,'market.html')
+def market(request,brandid,placeid,priceid,suitid,sortid):
+
+
+    return render(request,'market.html',context=data)
