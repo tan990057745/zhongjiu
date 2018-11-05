@@ -408,7 +408,7 @@
             <!--头部底部的下半部的导航-->
             <div class="h_b_b_nav">
                 <ul>
-                    <li><a href="">商城</a></li>
+                    <li><a href="{% url 'myapp:market' %}">商城</a></li>
                     <li><a href="">闪购</a></li>
                     <li><a href="">白酒专场</a></li>
                     <li><a href="">红酒专场</a></li>
@@ -672,8 +672,8 @@
             <i></i>
             <span>白酒</span>
             <ul class="type-item">
-                <li>爆品推荐</li>
-                <li>茅台</li>
+                <li><a href="{% url 'myapp:home' %}">爆品推荐</a></li>
+                <li><a href="{% url 'myapp:home' %}">茅台</a></li>
                 <li>五粮液</li>
                 <li>酱香</li>
                 <li>浓香</li>
@@ -702,7 +702,7 @@
                     {% for whitespirit in whitespirits %}
                         <ul>
                             <li><img src="{{ whitespirit.img }}"></li>
-                            <li><sapn></sapn>{{ whitespirit.name }}</span></li>
+                            <li>{{ whitespirit.name }}</li>
                             <li><p>￥{{ whitespirit.price }}</p></li>
                         </ul>
 

@@ -152,3 +152,5 @@ def test(request):
     return render(request,'test.html')
 #######以上为开发调试###############
 
+def market(request):
+    return render(request,'market.html')
