@@ -6,7 +6,7 @@ from django.http import HttpResponse, response
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from myapp.models import User, Wheel, whiteSpirit
+from myapp.models import User, Wheel, whiteSpirit, Goods
 
 
 def home(request):
@@ -163,6 +163,59 @@ def test(request):
 #######以上为开发调试###############
 
 def market(request,brandid,placeid,priceid,suitid,sortid):
+# def market(request):
+    brandid = int(request.COOKIES.get('brandIndex',0))
+    placeid = int(request.COOKIES.get('placeIndex',0))
+    priceid = int(request.COOKIES.get('priceIndex',0))
+    suitid = int(request.COOKIES.get('suitIndex',0))
+    sortid = int(request.COOKIES.get('sortIndex',0))
 
+    print(sortid)
+
+    xfList = Goods.objects.filter(isxf=1)   #精选列表
+
+    if brandid == 0:
+        goodsList1 = Goods.objects.all()
+    else:
+        goodsList1 = Goods.objects.filter(brandid=brandid)
+
+    if placeid == 0:
+        goodsList2 = goodsList1
+    else:
+        goodsList2 = goodsList1.filter(placeid=placeid)
+
+    if priceid == 0:
+        goodsList3 = goodsList2
+    else:
+        goodsList3 = goodsList2.filter(priceid=priceid)
+
+    if suitid == 0:
+        goodsList4 = goodsList3
+    else:
+        goodsList4 = goodsList3.filter(suitid=suitid)
+
+    if sortid == 0 or 1:
+        goodsList5 = goodsList4
+    elif sortid == 2:
+        goodsList5 = goodsList4.order_by('saleNum')  #按销量
+    elif sortid == 3:
+        goodsList5 = goodsList4.order_by('price')    #按价格
+    elif sortid == 4:
+        goodsList5 = goodsList4.order_by('commentsNum') # 按评论数
+    elif sortid == 5:
+        goodsList5 = goodsList4.order_by('shelfTime')  #按上架时间排序
+    elif sortid == 6:
+        goodsList5 = goodsList4.filter(isspec=1)   #是否特价
+
+    data = {
+        'goodsList':goodsList5,
+
+        'brandid':brandid,
+        'placeid':placeid,
+        'priceid':priceid,
+        'suitid':suitid,
+        'sortid':sortid,
+        'xfList':xfList,
+    }
 
     return render(request,'market.html',context=data)

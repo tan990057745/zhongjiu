@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}" ></script>
 		<script type="text/javascript" src="{% static 'js/head.js' %}" ></script>
 		<script type="text/javascript" src="{% static 'js/commodityList.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/market.js' %}" ></script>
 	</head>
 	<body>
 		<!--头部-->
@@ -426,46 +427,60 @@
 				<p>洋酒</p>
 				<div class="content_left_bottom">
 					<h3>热销排行榜</h3>
-					<ul></ul>
+					<ul>
+                        {% for xf in xfList %}
+                            <li>
+                                <img src="{{ xf.img }}">
+                                <h4>{{ xf.name }}</h4>
+                                <p>
+                                    <i>￥{{ xf.price }}</i>
+                                    <span>{{ xf.commentsNum }}个评论</span>
+                                </p>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
 				</div>
 			</div>
 			<div class="content_right">
 				<h3>搜索到<span>95</span>件商品</h3>
-				<ul class="ul1">
+				<ul class="ul1" id="brandBt">
 					<li style="font-weight: bold; font-size: 14px;color: #444;">品牌：</li>
-					<li><a href="{% url 'myapp:market' 1 placeid placeid suitid 0 %}">兄弟</a></li>
-					<li><a href="{% url 'myapp:market' 1 placeid placeid suitid 0 %}">皇家贝斯</a></li>
-					<li><a href="{% url 'myapp:market' 1 placeid placeid suitid 0 %}">深蓝</a></li>
-					<li><a href="{% url 'myapp:market' 1 placeid placeid suitid 0 %}">马爹利</a></li>
-					<li><a href="{% url 'myapp:market' 1 placeid placeid suitid 0 %}">芝华士</a></li>
-					<li><a href="{% url 'myapp:market' 1 placeid placeid suitid 0 %}">人头马</a></li>
-					<li><a href="{% url 'myapp:market' 1 placeid placeid suitid 0 %}">轩尼诗</a></li>
+					<li><a href="{% url 'myapp:market' 1 placeid priceid suitid sortid %}">兄弟</a></li>
+					<li><a href="{% url 'myapp:market' 2 placeid priceid suitid sortid %}">皇家贝斯</a></li>
+					<li><a href="{% url 'myapp:market' 3 placeid priceid suitid sortid %}">深蓝</a></li>
+					<li><a href="{% url 'myapp:market' 4 placeid priceid suitid sortid %}">马爹利</a></li>
+					<li><a href="{% url 'myapp:market' 5 placeid priceid suitid sortid %}">芝华士</a></li>
+					<li><a href="{% url 'myapp:market' 6 placeid priceid suitid sortid %}">人头马</a></li>
+					<li><a href="{% url 'myapp:market' 7 placeid priceid suitid sortid %}">轩尼诗</a></li>
 				</ul>
-				<ul class="ul1">
+				<ul class="ul1" id="placeBt">
 
 					<li style="font-weight: bold; font-size: 14px;color: #444;">产地：</li>
-					<li><a href="{% url 'myapp:market' brandid 1 placeid suitid 0 %}">中国</a></li>
-					<li><a href="{% url 'myapp:market' brandid 2 placeid suitid 0 %}">法国</a></li>
-					<li><a href="{% url 'myapp:market' brandid 3 placeid suitid 0 %}">英国</a></li>
-					<li><a href="{% url 'myapp:market' brandid 4 placeid suitid 0 %}">墨西哥</a></li>
-					<li><a href="{% url 'myapp:market' brandid 5 placeid suitid 0 %}">美国</a></li>
+					<li><a href="{% url 'myapp:market' brandid 1 placeid suitid sortid %}">中国</a></li>
+					<li><a href="{% url 'myapp:market' brandid 2 placeid suitid sortid %}">法国</a></li>
+					<li><a href="{% url 'myapp:market' brandid 3 placeid suitid sortid %}">英国</a></li>
+					<li><a href="{% url 'myapp:market' brandid 4 placeid suitid sortid %}">墨西哥</a></li>
+					<li><a href="{% url 'myapp:market' brandid 5 placeid suitid sortid %}">美国</a></li>
 				</ul>
-				<ul class="ul1">
+				<ul class="ul1" id="priceBt">
 					<li style="font-weight: bold; font-size: 14px;color: #444;">价格：</li>
-					<li><a href="{% url 'myapp:market' brandid placeid 1 suitid 0 %}">1-99</a></li>
-					<li><a href="{% url 'myapp:market' brandid placeid 2 suitid 0 %}">100-199</a></li>
-					<li><a href="{% url 'myapp:market' brandid placeid 3 suitid 0 %}">200-299</a></li>
-					<li><a href="{% url 'myapp:market' brandid placeid 4 suitid 0 %}">300-499</a></li>
-					<li><a href="{% url 'myapp:market' brandid placeid 5 suitid 0 %}">500-799</a></li>
-					<li><a href="{% url 'myapp:market' brandid placeid 6 suitid 0 %}">800-999</a></li>
-					<li><a href="{% url 'myapp:market' brandid placeid 7 suitid 0 %}">1000以上</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid 1 suitid sortid %}">1-99</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid 2 suitid sortid %}">100-199</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid 3 suitid sortid %}">200-299</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid 4 suitid sortid %}">300-499</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid 5 suitid sortid %}">500-799</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid 6 suitid sortid %}">800-999</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid 7 suitid sortid %}">1000以上</a></li>
 				</ul>
-				<ul class="ul1">
+
+				<ul class="ul1" id="suitBt">
 					<li style="font-weight: bold; font-size: 14px;color: #444;">适用：</li>
-					<li><a href="{% url 'myapp:market' brandid placeid priceid 1 1 %}">聚会用酒</a></li>
-					<li><a href="{% url 'myapp:market' brandid placeid priceid 2 1 %}">商务用酒</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid priceid 1 sortid %}">聚会用酒</a></li>
+					<li><a href="{% url 'myapp:market' brandid placeid priceid 2 sortid %}">商务用酒</a></li>
 				</ul>
-				<ul class="ul2">
+
+				<ul class="ul2" id="sortBt">
 					<li style="font-weight: bold; font-size: 14px;color: #444;">排序：</li>
 					<li><a href="{% url 'myapp:market' brandid placeid priceid suitid 1 %}">默认</a></li>
 					<li><a href="{% url 'myapp:market' brandid placeid priceid suitid 2 %}">销量</a></li>
