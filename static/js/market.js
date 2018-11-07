@@ -57,7 +57,6 @@ $(function () {
 
     //(5)
     sortIndex = $.cookie('sortIndex')
-    alert("执行了看看嘛")
     if (sortIndex !=0){ // 已经有点击分类
         $('#sortBt li').eq(sortIndex).children('a').css('background','red').parent().sibling().children('a').css('background', 'white');
     } else {    // 没有点击分类

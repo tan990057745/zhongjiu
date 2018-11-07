@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.login, name='login'),
     url(r'^market/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$', views.market, name='market'),
-    url(r'^verifycode/\d+/$', views.verifycode, name='verifycode'),
+    url(r'^verifycode/$', views.verifycode, name='verifycode'),
     url(r'^shoppingCart/$', views.shoppingCart, name='shoppingCart'),
     url(r'^test/$', views.test, name='test'),
 

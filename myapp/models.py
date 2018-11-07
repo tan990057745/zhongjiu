@@ -64,7 +64,20 @@ class Goods(models.Model):
     class Meta:
         db_table='zj_market'
 
+class Users(models.Model):
+    # 账号
+    account = models.CharField(max_length=80, unique=True)
+    # 密码
+    password = models.CharField(max_length=256)
+    # 手机号
+    phone = models.CharField(max_length=20, unique=True)
+    # 地址
+    addr = models.CharField(max_length=256)
+    # token
+    token = models.CharField(max_length=256)
 
+    class Meta:
+        db_table = 'zj_users'
 
 
 

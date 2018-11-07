@@ -1,208 +1,118 @@
+$(function () {
 
-$(function(){
+    // 账号验证
+    $('#account input').blur(function () {
+        if($(this).val() == '') return
 
-    //验证码刷新
-    count = 0;
-	$(".changeCode").click(function () {
-		count++
-        $("#codePic").attr("src", "/verifycode/" + count +"/");
-        // alert("被执行了")
+        // 数字、字母
+        var reg = /^[A-Za-z0-9]+$/
+        if (reg.test($(this).val())) {  // 符合
+            // ajax,获取账号是否可用
+            $.get('/checkaccount/', {'account':$(this).val()},function (response) {
+                console.log(response)
+                if (response.status == 1){  // 可用
+                    $('#account i').html('')
+                    $('#account').removeClass('has-error').addClass('has-success')
+                    $('#account span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+                } else {    // 不可用
+                    $('#account i').html(response.msg)
+                    $('#account').removeClass('has-success').addClass('has-error')
+                    $('#account span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+                }
+            })
+
+        } else {    // 不符合
+            $('#account i').html('账号由数字、字母组成')
+            $('#account').removeClass('has-success').addClass('has-error')
+            $('#account span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+        }
     })
 
 
-	//手机号验证
-	$('.inp1').change(function(){
-		phone();
-	})
-	//生成随机验证码
-	// generate();
-	// var stringNum = $('.identifyingCode').html();
-	// $('.inp2').change(function(){
-	// 	judge();
-	// })
-	// $('.getVerify').click(function(){
-	// 	stringNum = generate();
-	// 	stringNum = $('.getVerify').html();
-	// })
-	// $('span').click(function(){
-	// 	stringNum = generate();
-	// 	stringNum = $('.identifyingCode').html();
-	// })
+    // 密码验证
+    $('#password input').blur(function () {
+        if($(this).val() == '') return
+
+        // 数字
+        var reg = /^[\d]{6,12}$/
+        if (reg.test($(this).val())) {  // 符合
+            $('#password i').html('')
+            $('#password').removeClass('has-error').addClass('has-success')
+            $('#password span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+        } else {    // 不符合
+            $('#password i').html('6~12位纯数字')
+            $('#password').removeClass('has-success').addClass('has-error')
+            $('#password span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+        }
+    })
+
+    // 确认密码
+    $('#passwd input').blur(function () {
+        if($(this).val() == '') return
+
+        // 数字
+        if ($(this).val() == $('#password input').val()) {  // 符合
+            $('#passwd i').html('')
+            $('#passwd').removeClass('has-error').addClass('has-success')
+            $('#passwd span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+        } else {    // 不符合
+            $('#passwd i').html('两次密码不一致')
+            $('#passwd').removeClass('has-success').addClass('has-error')
+            $('#passwd span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+        }
+    })
 
 
-	//免费获取校验码
-	var strings = "";
-	$('.bnt1').click(function(){
-		strings = "";
-		for(var i = 0; i < 4; i++)
-		{
-			var num = parseInt(Math.random() * 100) % 75 + 48;
-			if((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)){
-				var str = String.fromCharCode(num);
-				strings = strings.concat(str);
-			}else{
-				i--;
-			}
-		}
-		alert(strings);
-	})
+    // 手机号码验证
+    $('#phone input').blur(function () {
+        if($(this).val() == '') return
 
-    //免费校验码验证
-	$('.inp3').change(function(){
-		$('h1').css('top','126px');
-		var checkCode = $('.inp3').val();
-		if(checkCode.toLowerCase() == strings.toLowerCase()){
-			$('h1').html("校验码输入正确");
-			$('h1').css('border','1px solid green').css('display','block').css('color','green');
-		}else{
-			$('h1').html("请输入正确的校验码");
-			$('h1').css('border','1px solid red').css('display','block').css('color','red');
-		}
-	})
+        // 手机
+        var reg = /^1[3|5|7|8|]\d{9}$/
+        if (reg.test($(this).val())) {  // 符合
+            $('#phone i').html('')
+            $('#phone').removeClass('has-error').addClass('has-success')
+            $('#phone span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+        } else {    // 不符合
+            $('#phone i').html('请输入正确的手机号')
+            $('#phone').removeClass('has-success').addClass('has-error')
+            $('#phone span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+        }
+    })
 
+    // 地址
+    $('#addr input').blur(function () {
+        if($(this).val() == '') return
+        $('#addr').removeClass('has-error').addClass('has-success')
+        $('#addr span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+    })
 
-	//密码验证
-	$('.inp4').change(function(){
-		paw();
-	})
+	//校验码
+	$('#verify input').blur(function () {
+        if($(this).val() == '') return
 
+        // 数字、字母
+        var reg = /^[A-Za-z0-9]+$/
+        if (reg.test($(this).val())) {  // 符合
+            // ajax,获取账号是否可用
+            $.get('/checkaccount/', {'account':$(this).val()},function (response) {
+                console.log(response)
+                if (response.status == 1){  // 可用
+                    $('#account i').html('')
+                    $('#account').removeClass('has-error').addClass('has-success')
+                    $('#account span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+                } else {    // 不可用
+                    $('#account i').html(response.msg)
+                    $('#account').removeClass('has-success').addClass('has-error')
+                    $('#account span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+                }
+            })
 
-	//密码重复输入验证
-	$('.inp5').change(function(){
-	        againPaw();
-	})
+        } else {    // 不符合
+            $('#account i').html('账号由数字、字母组成')
+            $('#account').removeClass('has-success').addClass('has-error')
+            $('#account span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+        }
+    })
 
-
-	//登录
-	$('.bnt2').click(function(){
-		var arr = $.cookie("obj") ? JSON.parse($.cookie("obj")) : [];
-		var arr1 = [];
-		if(phone() == true && judge() == true && paw() == true && againPaw() == true){
-			//保存账号和密码在游览器中
-			var obj1 = {};
-			obj1.name = $('.inp1').val();
-			obj1.paw = $('.inp4').val();
-			arr.push(obj1);
-			arr1.push(obj1);
-			//JSON解析: 把JSON格式的字符串转换成对象 , JSON.parse()
-			//JSON的序列化: 把对象转换成JSON字符串 , JSON.stringify()
-			$.cookie("obj", JSON.stringify(arr), {expires:7, path:"/"});
-			$.cookie("obj1", JSON.stringify(arr1), {expires:7, path:"/"});
-			window.location.href = "home_page.html";
-		}else{
-			$('h1').html("请把信息填写完整");
-			$('h1').css('border','1px solid red').css('display','block').css('color','red');
-		}
-	})
 })
-
-
-//验证手机号
-function phone(){
-	var arr = $.cookie("obj") ? JSON.parse($.cookie("obj")) : [];
-	var phones = $('.inp1').val();
-	var reg = /^1[3458][0-9]{9}/;
-	$('h1').css('top','0');
-	for(var i = 0;i < arr.length; i++){
-		if(arr[i].name == phones){
-			$('h1').html("此注册号已经存在");
-			$('h1').css('border','1px solid red').css('display','block').css('color','red');
-			return false;
-		}
-	}
-	if(reg.test(phones)){
-		$('h1').html("手机号输入正确");
-		$('h1').css('border','1px solid green').css('display','block').css('color','green');
-		return true;
-	}else{
-		$('h1').html("请输入正确的手机号");
-		$('h1').css('border','1px solid red').css('display','block').css('color','red');
-		return false;
-	}
-}
-//生成验证码
-function generate(){
-	var strings = "";
-	for(var i = 0; i < 4; i++)
-	{
-		var num = parseInt(Math.random() * 100) % 75 + 48;
-		if((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)){
-			var str = String.fromCharCode(num);
-			strings = strings.concat(str);
-			var color = "#" + Math.ceil(Math.random() * 0xFFFFFF).toString(16);
-			$('.identifyingCode').css('color',color);
-		}else{
-			i--;
-		}
-	}
-	var color = "#" + Math.ceil(Math.random() * 0xFFFFFF).toString(16);
-	$('.identifyingCode').css('background',color);
-	$('.identifyingCode').html(strings);
-}
-//判断验证码是否正确
-function judge(){
-	$('h1').css('top','68px');
-	var stringNum = $('.identifyingCode').html();
-	var stringsNum = $('.inp2').val();
-	if(stringNum.toLowerCase() == stringsNum.toLowerCase()){
-		$('h1').html("验证码输入正确");
-		$('h1').css('border','1px solid green').css('display','block').css('color','green');
-		return true;
-	}else{
-		$('h1').html("输入错误，请按右图输入验证码，不区分大小写");
-		$('h1').css('border','1px solid red').css('display','block').css('color','red');
-		return false;
-	}
-}
-//判断密码是否正确
-function paw(){
-	// var reg = /((?=.*\d)(?=.*\D)|(?=.*[a-zA-Z])(?=.*[^a-zA-Z]))^.{6,16}$/;
-
-    var reg = /^[*]{6,11}$/
-    var paw = $('.inp4').val();
-	$('h1').css('top','184px');
-	if(reg.test(paw)){
-		$('h1').html("密码输入正确");
-		$('h1').css('border','1px solid green').css('display','block').css('color','green');
-		return true;
-	}else{
-		$('h1').html("密码以字母数字特殊字符组合，长度为6-16");
-		$('h1').css('border','1px solid red').css('display','block').css('color','red');
-		return false;
-	}
-}
-//密码重复输入验证
-function againPaw(){
-	$('h1').css('top','242px');
-	if($('.inp4').val() == $('.inp5').val()){
-		$('h1').html("输入正确");
-		$('h1').css('border','1px solid green').css('display','block').css('color','green');
-		return true;
-	}else{
-		$('h1').html("两次输入密码不一致");
-		$('h1').css('border','1px solid red').css('display','block').css('color','red');
-		return false;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

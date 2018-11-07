@@ -101,8 +101,8 @@ def login(request):
 ###########验证码########
 def verifycode(request):
     # 创建图片
-    width = 110
-    height = 40
+    width = 80
+    height = 24
     r = random.randrange(0,256)
     g = random.randrange(0,256)
     b = random.randrange(0,256)
@@ -122,24 +122,18 @@ def verifycode(request):
     # 创建画笔
     draw = ImageDraw.Draw(image)
 
-    # 添加噪点
-    for i in range(0,300):
-        xy = (random.randrange(0,width), random.randrange(0,height))
-        fill = (random.randrange(0,256),random.randrange(0,256),random.randrange(0,256))
-        draw.point(xy, fill=fill)
-
     # 导入字体
-    font = ImageFont.truetype('static/fonts/Fangsong.ttf',25)
+    font = ImageFont.truetype('static/fonts/Fangsong.ttf',20)
     # 字体颜色
     fontcolor1 = (255, random.randrange(0,256), random.randrange(0,256))
     fontcolor2 = (255, random.randrange(0, 256), random.randrange(0, 256))
     fontcolor3 = (255, random.randrange(0, 256), random.randrange(0, 256))
     fontcolor4 = (255, random.randrange(0, 256), random.randrange(0, 256))
     # 绘制操作
-    draw.text((5,3), rand_str[0], fill=fontcolor1,font=font)
-    draw.text((25, 3), rand_str[1], fill=fontcolor2, font=font)
-    draw.text((45, 3), rand_str[2], fill=fontcolor3, font=font)
-    draw.text((65, 3), rand_str[3], fill=fontcolor4, font=font)
+    draw.text((5,2), rand_str[0], fill=fontcolor1,font=font)
+    draw.text((20,2), rand_str[1], fill=fontcolor2, font=font)
+    draw.text((40,2), rand_str[2], fill=fontcolor3, font=font)
+    draw.text((60,2), rand_str[3], fill=fontcolor4, font=font)
     # 释放
     del draw
     #文件操作
@@ -162,6 +156,10 @@ def test(request):
     return render(request,'test.html')
 #######以上为开发调试###############
 
+
+
+
+#####闪购超市#####
 def market(request,brandid,placeid,priceid,suitid,sortid):
 # def market(request):
     brandid = int(request.COOKIES.get('brandIndex',0))
@@ -219,3 +217,4 @@ def market(request,brandid,placeid,priceid,suitid,sortid):
     }
 
     return render(request,'market.html',context=data)
+#####闪购超市######################
