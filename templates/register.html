@@ -93,9 +93,12 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入校验码"
                                required="required">
-                        <div class="input-group-addon" id="changeCode"><img src="{% url 'myapp:verifycode' %}">&nbsp换一张
+                        <div class="input-group-addon">
+                            <img src="{% url 'myapp:verifycode' %}">
+                            <span id="changeCode" style="height: 18px">换一张</span>
                         </div>
                     </div>
+                    <i></i>
                 </div>
 
                 <input type="submit" id="subButton" value="同意协议并注册">

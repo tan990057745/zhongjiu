@@ -87,32 +87,25 @@ $(function () {
         $('#addr span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
     })
 
-	//校验码
-	$('#verify input').blur(function () {
-        if($(this).val() == '') return
+	//校验码验证
+    $('#verify input').blur(function () {
+        if ($(this).val() == '') return
+        var $that = $(this)
 
-        // 数字、字母
-        var reg = /^[A-Za-z0-9]+$/
-        if (reg.test($(this).val())) {  // 符合
-            // ajax,获取账号是否可用
-            $.get('/checkaccount/', {'account':$(this).val()},function (response) {
-                console.log(response)
-                if (response.status == 1){  // 可用
-                    $('#account i').html('')
-                    $('#account').removeClass('has-error').addClass('has-success')
-                    $('#account span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
-                } else {    // 不可用
-                    $('#account i').html(response.msg)
-                    $('#account').removeClass('has-success').addClass('has-error')
-                    $('#account span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
-                }
-            })
-
-        } else {    // 不符合
-            $('#account i').html('账号由数字、字母组成')
-            $('#account').removeClass('has-success').addClass('has-error')
-            $('#account span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
-        }
+        $.get('/checkVerifyCode/', function (response) {
+            // console.log(response)
+            if (response.code == $that.val().toLowerCase()) {  // 校验码正确
+                $('#verify i').html('')
+            } else {    // 校验码错误
+                $('#verify i').html('请输入正确校验码').css('color','red')
+            }
+        })
     })
 
+    //校验码刷新
+    count1 = 0
+    $('#changeCode').click(function () {
+        count1++
+        $(this).prev().attr("src","/verifycode/"+count1+"/")
+    })
 })

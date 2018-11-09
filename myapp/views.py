@@ -1,15 +1,25 @@
+import hashlib
 import io
+import os
 import random
+import uuid
 
 from PIL import ImageFont, ImageDraw, Image
-from django.http import HttpResponse, response
+from django.conf import settings
+from django.http import HttpResponse, response, JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from myapp.models import User, Wheel, whiteSpirit, Goods
+from myapp.models import Wheel, whiteSpirit, Goods, Users
 
-
+#######主页
 def home(request):
+    token = request.session.get('token')
+    if token:
+        user = Users.objects.get(token=token)
+        account= user.account
+    else:
+        account = '未登录'
 
     wheels= Wheel.objects.all()
     whitespirits0 = whiteSpirit.objects.filter(typeid=0)
@@ -27,74 +37,10 @@ def home(request):
         'whitespirits3': whitespirits3,
         'whitespirits4': whitespirits4,
         'whitespirits5': whitespirits5,
+        'account':account
     }
     return render(request,'home.html',context=data)
-
-
-
-
-
-def register(request):
-    if request.method == 'GET':
-        return render(request,'register.html')
-    elif request.method == 'POST':
-        user_tel = request.POST.get('user_tel')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
-
-        inpverifycode = request.POST.get('inputVerifyCode')
-        failVerify = request.POST.get('failVerify')
-        verifycode = request.session.get('rand_str')
-
-        # 先判断HTML产生的校验码是否输入正确
-        if failVerify == "":    #为空则校验码输入正确
-            #再判断后台生成的验证码是否正确输入
-            if len(inpverifycode) == len(verifycode):
-                for i in range(len(verifycode)):
-                    if verifycode[i].lower()!=inpverifycode[i].lower():
-                        return HttpResponse("验证码输入错误，请重新输入")
-                else:
-                    #最后判断密码输入是否OK
-
-
-                    if password1 == password2:
-                        user = User()
-                        user.user_tel = user_tel
-                        user.password = password1
-                        user.save()
-                        response = redirect('myapp:home')
-                        response.set_cookie('user_tel', user_tel)
-                        return response
-                    else:
-                        return HttpResponse("两次密码输入不一致，请重新输入")
-            else:
-                return HttpResponse("验证码输入长度错误，请重新输入")
-        else:          #校验码信息不为空，则没有正确输入校验码
-            return HttpResponse("请重新获取验证码并正确输入！")
-
-
-
-
-
-
-######登陆#################
-def login(request):
-    if request.method == 'GET':
-        return render(request,'login.html')
-    elif request.method == 'POST':
-        user_tel = request.POST.get('user_tel')
-        password = request.POST.get('password')
-
-    users = User.objects.filter(user_tel=user_tel).filter(password=password)
-    if users.count():
-        user = users.first()
-
-        response = redirect('myapp:home')
-        response.set_cookie('user_tel',user.user_tel)
-        return response
-    else:
-        return HttpResponse('用户名或密码错误')
-#####以上为登陆######
+####以上为主页########
 
 
 
@@ -113,15 +59,11 @@ def verifycode(request):
     for i in range(0,4):
         temp = random.randrange(0,len(str))
         rand_str += str[temp]
-
      # session保存验证码
     request.session['rand_str'] = rand_str
     request.session.set_expiry(60*3)
-
-
     # 创建画笔
     draw = ImageDraw.Draw(image)
-
     # 导入字体
     font = ImageFont.truetype('static/fonts/Fangsong.ttf',20)
     # 字体颜色
@@ -138,11 +80,65 @@ def verifycode(request):
     del draw
     #文件操作
     buff = io.BytesIO()
-    image.save(buff, 'png') # 保存在内存中
-    return HttpResponse(buff.getvalue(),'image/png')
+    image.save(buff, 'png')  # 保存在内存中
+    return HttpResponse(buff.getvalue(), 'image/png')
 #########以上为验证码########
 
+def genarate_password(param):
+    sha = hashlib.sha256()
+    sha.update(param.encode('utf-8'))
+    return sha.hexdigest()
 
+######注册####
+def register(request):
+    if request.method == 'GET':
+        return render(request,'register.html')
+    elif request.method == 'POST':
+        user = Users()
+        user.account = request.POST.get('account')
+        user.password = genarate_password(request.POST.get('password'))
+        user.phone = request.POST.get('phone')
+        user.addr = request.POST.get('addr')
+        user.token = str(uuid.uuid5(uuid.uuid4(), 'register'))
+        user.save()
+        # 状态保持
+        request.session['token'] = user.token
+        return redirect('myapp:home')
+######注册######
+
+
+######登陆#################
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    elif request.method == 'POST':
+        account = request.POST.get('account')
+        password = request.POST.get('password')
+
+        print('haha')
+        try:
+            user = Users.objects.get(account=account)
+            if user.password == genarate_password(password):  # 登录成功
+                # 更新token
+                user.token = str(uuid.uuid5(uuid.uuid4(), 'login'))
+                user.save()
+                request.session['token'] = user.token
+                return redirect('myapp:home')
+            else:  # 登录失败
+                return render(request, 'login.html', context={'passwdErr': '密码错误!'})
+        except:
+            return render(request, 'login.html', context={'acountErr': '账号不存在!'})
+#####以上为登陆######
+
+
+### 验证校验码################
+def checkVerifyCode(request):
+    code = request.session.get('rand_str').lower()
+    responseData = {
+        'code':code,
+    }
+    return JsonResponse(responseData)
+#########验证码验证#####
 
 ###########购物车#####
 def shoppingCart(request):
@@ -150,48 +146,30 @@ def shoppingCart(request):
 #######以上为购物车#####
 
 
-
-########开发调试###################
-def test(request):
-    return render(request,'test.html')
-#######以上为开发调试###############
-
-
-
-
 #####闪购超市#####
 def market(request,brandid,placeid,priceid,suitid,sortid):
-# def market(request):
     brandid = int(request.COOKIES.get('brandIndex',0))
     placeid = int(request.COOKIES.get('placeIndex',0))
     priceid = int(request.COOKIES.get('priceIndex',0))
     suitid = int(request.COOKIES.get('suitIndex',0))
     sortid = int(request.COOKIES.get('sortIndex',0))
-
-    print(sortid)
-
     xfList = Goods.objects.filter(isxf=1)   #精选列表
-
     if brandid == 0:
         goodsList1 = Goods.objects.all()
     else:
         goodsList1 = Goods.objects.filter(brandid=brandid)
-
     if placeid == 0:
         goodsList2 = goodsList1
     else:
         goodsList2 = goodsList1.filter(placeid=placeid)
-
     if priceid == 0:
         goodsList3 = goodsList2
     else:
         goodsList3 = goodsList2.filter(priceid=priceid)
-
     if suitid == 0:
         goodsList4 = goodsList3
     else:
         goodsList4 = goodsList3.filter(suitid=suitid)
-
     if sortid == 0 or 1:
         goodsList5 = goodsList4
     elif sortid == 2:
@@ -204,10 +182,8 @@ def market(request,brandid,placeid,priceid,suitid,sortid):
         goodsList5 = goodsList4.order_by('shelfTime')  #按上架时间排序
     elif sortid == 6:
         goodsList5 = goodsList4.filter(isspec=1)   #是否特价
-
     data = {
         'goodsList':goodsList5,
-
         'brandid':brandid,
         'placeid':placeid,
         'priceid':priceid,
@@ -215,6 +191,29 @@ def market(request,brandid,placeid,priceid,suitid,sortid):
         'sortid':sortid,
         'xfList':xfList,
     }
-
     return render(request,'market.html',context=data)
 #####闪购超市######################
+
+
+#####账户验证#####
+def checkaccount(request):
+    account = request.GET.get('account')
+    responseData = {
+        'msg': '账号可用',
+        'status': 1
+    }
+    try:
+        user = Users.objects.get(account=account)
+        responseData['msg'] = '账号已被占用'
+        responseData['status'] = -1
+        return JsonResponse(responseData)
+    except:
+        return JsonResponse(responseData)
+########账号验证
+
+
+#########登出#####
+def logout(request):
+    request.session.flush()
+    return redirect('myapp:home')
+########登出#######
