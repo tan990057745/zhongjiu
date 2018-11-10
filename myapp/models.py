@@ -46,17 +46,12 @@ class Goods(models.Model):
     name = models.CharField(max_length=100) #名字
     price = models.DecimalField(max_digits=7, decimal_places=2) #价格
     saleNum = models.IntegerField()         #销量
-    commentsNum = models.CharField(max_length=100)   #评论数量
+    commentsNum = models.IntegerField()  #评论数量
 
     isxf = models.IntegerField()         #是否优选
-    isspec = models.IntegerField()       #是否特价
     brandid = models.IntegerField()       #品牌ID
     placeid = models.IntegerField()     #产地
-    priceid = models.IntegerField()      #价格
     suitid = models.IntegerField()        #适用ID
-    sortid = models.IntegerField()        #按照什么排序
-    shelfTime = models.DateField()             #上架时间
-
     class Meta:
         db_table='zj_market'
 

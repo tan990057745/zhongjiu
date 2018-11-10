@@ -33,7 +33,7 @@
         <div class="header_bottom_left"><a href=""></a></div>
         <div class="header_bottom_right">
             <h1></h1>
-            <p>我已经注册，马上 <a href="entry.html">登录&gt;&gt;</a></p>
+            <p>我已经注册，马上 <a href="{% url 'myapp:login' %}">登录&gt;&gt;</a></p>
             <form action="{% url 'myapp:register' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {#            账号#}

@@ -66,11 +66,17 @@ def verifycode(request):
     draw = ImageDraw.Draw(image)
     # 导入字体
     font = ImageFont.truetype('static/fonts/Fangsong.ttf',20)
+    # 添加噪点
+    for i in range(0, 300):
+        xy = (random.randrange(0, width), random.randrange(0, height))
+        fill = (random.randrange(0, 256), random.randrange(0, 256), random.randrange(0, 256))
+        draw.point(xy, fill=fill)
     # 字体颜色
     fontcolor1 = (255, random.randrange(0,256), random.randrange(0,256))
     fontcolor2 = (255, random.randrange(0, 256), random.randrange(0, 256))
     fontcolor3 = (255, random.randrange(0, 256), random.randrange(0, 256))
     fontcolor4 = (255, random.randrange(0, 256), random.randrange(0, 256))
+
     # 绘制操作
     draw.text((5,2), rand_str[0], fill=fontcolor1,font=font)
     draw.text((20,2), rand_str[1], fill=fontcolor2, font=font)
@@ -142,53 +148,60 @@ def checkVerifyCode(request):
 
 ###########购物车#####
 def shoppingCart(request):
+
     return render(request,'shoppingCart.html')
 #######以上为购物车#####
 
 
 #####闪购超市#####
-def market(request,brandid,placeid,priceid,suitid,sortid):
-    brandid = int(request.COOKIES.get('brandIndex',0))
-    placeid = int(request.COOKIES.get('placeIndex',0))
-    priceid = int(request.COOKIES.get('priceIndex',0))
-    suitid = int(request.COOKIES.get('suitIndex',0))
-    sortid = int(request.COOKIES.get('sortIndex',0))
+# def market(request,brandid,placeid,priceid,suitid,sortid):
+def market(request):
+
+    brandIndex = int(request.COOKIES.get('brandIndex',0))
+    placeIndex = int(request.COOKIES.get('placeIndex',0))
+    priceIndex = int(request.COOKIES.get('priceIndex',0))
+    suitIndex = int(request.COOKIES.get('suitIndex',0))
+    sortIndex = int(request.COOKIES.get('sortIndex',0))
+
+    print(brandIndex,placeIndex,priceIndex,suitIndex,sortIndex)
+    print(type(brandIndex))
     xfList = Goods.objects.filter(isxf=1)   #精选列表
-    if brandid == 0:
+
+    if brandIndex == 0 or brandIndex == 1:
         goodsList1 = Goods.objects.all()
+        # print('haha1')
     else:
-        goodsList1 = Goods.objects.filter(brandid=brandid)
-    if placeid == 0:
+        goodsList1 = Goods.objects.filter(brandid=brandIndex)
+        # print('h哈哈2')
+
+    if placeIndex == 0 or placeIndex == 1:
         goodsList2 = goodsList1
     else:
-        goodsList2 = goodsList1.filter(placeid=placeid)
-    if priceid == 0:
+        goodsList2 = goodsList1.filter(placeid=placeIndex)
+
+    if priceIndex == 0 or priceIndex == 1:                                  #按价格区间筛选
         goodsList3 = goodsList2
-    else:
-        goodsList3 = goodsList2.filter(priceid=priceid)
-    if suitid == 0:
+    elif priceIndex == 2:
+        goodsList3 = goodsList2.filter(price__gte=1,price__lte=99)
+    elif priceIndex == 3:
+        goodsList3 = goodsList2.filter(price__gte=100, price__lte=199)
+    elif priceIndex == 4:
+        goodsList3 = goodsList2.filter(price__gte=200)
+    #
+    if suitIndex == 0 or suitIndex == 1:
         goodsList4 = goodsList3
     else:
-        goodsList4 = goodsList3.filter(suitid=suitid)
-    if sortid == 0 or 1:
+        goodsList4 = goodsList3.filter(suitid=suitIndex)
+
+    if sortIndex == 0 or sortIndex == 1:
         goodsList5 = goodsList4
-    elif sortid == 2:
-        goodsList5 = goodsList4.order_by('saleNum')  #按销量
-    elif sortid == 3:
-        goodsList5 = goodsList4.order_by('price')    #按价格
-    elif sortid == 4:
-        goodsList5 = goodsList4.order_by('commentsNum') # 按评论数
-    elif sortid == 5:
-        goodsList5 = goodsList4.order_by('shelfTime')  #按上架时间排序
-    elif sortid == 6:
-        goodsList5 = goodsList4.filter(isspec=1)   #是否特价
+    elif sortIndex == 2:
+        goodsList5 = goodsList4.order_by('-price')  #按价格
+    elif sortIndex == 3:
+        goodsList5 = goodsList4.order_by('-commentsNum')    #按评论数
+
     data = {
         'goodsList':goodsList5,
-        'brandid':brandid,
-        'placeid':placeid,
-        'priceid':priceid,
-        'suitid':suitid,
-        'sortid':sortid,
         'xfList':xfList,
     }
     return render(request,'market.html',context=data)
@@ -217,3 +230,5 @@ def logout(request):
     request.session.flush()
     return redirect('myapp:home')
 ########登出#######
+
+
