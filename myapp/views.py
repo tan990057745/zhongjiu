@@ -232,3 +232,19 @@ def logout(request):
 ########登出#######
 
 
+####商品详情#######
+def productMsg(request,num):
+    product = Goods.objects.get(goodsid=num)
+    photoList = []
+    photoList = product.photo.split('#')
+    print(photoList)
+    data = {
+        'product':product,
+        'photoList0':photoList[0],
+        'photoList1': photoList[1],
+        'photoList2': photoList[2],
+        'photoList3': photoList[3],
+        'photoList4': photoList[4],
+    }
+    return render(request,'productMsg.html',context=data)
+######商品详情######

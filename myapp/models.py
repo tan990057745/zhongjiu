@@ -43,6 +43,7 @@ class whiteSpirit(HomeShow):
 #创建商城商品列表
 class Goods(models.Model):
     img = models.CharField(max_length=256)  #图片
+    photo = models.CharField(max_length=256)  #详细图片
     name = models.CharField(max_length=100) #名字
     price = models.DecimalField(max_digits=7, decimal_places=2) #价格
     saleNum = models.IntegerField()         #销量
@@ -52,8 +53,10 @@ class Goods(models.Model):
     brandid = models.IntegerField()       #品牌ID
     placeid = models.IntegerField()     #产地
     suitid = models.IntegerField()        #适用ID
+    goodsid = models.IntegerField()      #商品ID
     class Meta:
         db_table='zj_market'
+
 
 class Users(models.Model):
     # 账号
